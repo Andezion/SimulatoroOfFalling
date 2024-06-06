@@ -10,13 +10,13 @@ const float g = 9.81f;
 class object
 {
 public:
-    float mass; // ìàññà 
-    float speed; // íà÷àëüíàÿ ñêîðîñòü 
-    float radius; // ðàäèóñ 
-    float uskor; // óñêîðåíèå 
-    float angle; // óãîë áðîñêà
-    float heigth; // âûñîòà 
-    float energy; // ýíåðãèÿ îáúåêòà 
+    float mass; // Ã¬Ã Ã±Ã±Ã  
+    float speed; // Ã­Ã Ã·Ã Ã«Ã¼Ã­Ã Ã¿ Ã±ÃªÃ®Ã°Ã®Ã±Ã²Ã¼ 
+    float radius; // Ã°Ã Ã¤Ã¨Ã³Ã± 
+    float uskor; // Ã³Ã±ÃªÃ®Ã°Ã¥Ã­Ã¨Ã¥ 
+    float angle; // Ã³Ã£Ã®Ã« Ã¡Ã°Ã®Ã±ÃªÃ 
+    float heigth; // Ã¢Ã»Ã±Ã®Ã²Ã  
+    float energy; // Ã½Ã­Ã¥Ã°Ã£Ã¨Ã¿ Ã®Ã¡ÃºÃ¥ÃªÃ²Ã  
 
     CircleShape ball;
 
@@ -44,7 +44,7 @@ public:
         window.draw(ball);
     }
 
-    Vector2f handler1(float time) // ñëó÷àé ñâîáîäíîãî ïàäåíèÿ 
+    Vector2f handler1(float time) // Ã±Ã«Ã³Ã·Ã Ã© Ã±Ã¢Ã®Ã¡Ã®Ã¤Ã­Ã®Ã£Ã® Ã¯Ã Ã¤Ã¥Ã­Ã¨Ã¿ 
     {
         float temp = heigth + speed * time - 0.5f * time * time * g;
         speed -= g * 0.25f;
@@ -62,7 +62,7 @@ public:
     }
 };
 
-bool isValidChar(char c, const string& currentInput) // ýòî âñ¸ ñîçäàíî äëÿ ïðîâåðêè ââîäà 
+bool isValidChar(char c, const string& currentInput) // Ã½Ã²Ã® Ã¢Ã±Â¸ Ã±Ã®Ã§Ã¤Ã Ã­Ã® Ã¤Ã«Ã¿ Ã¯Ã°Ã®Ã¢Ã¥Ã°ÃªÃ¨ Ã¢Ã¢Ã®Ã¤Ã  
 {
     if (isdigit(c) || c == '.') 
     {
@@ -79,7 +79,7 @@ bool isValidChar(char c, const string& currentInput) // ýòî âñ¸ ñîçäàíî äëÿ ïðîâ
     return false;
 }
 
-void generator(RenderWindow &window, int pole[60][40]) // íó òóò íàø êðàñèâûé ôîí 
+void generator(RenderWindow &window, int pole[60][40]) // Ã­Ã³ Ã²Ã³Ã² Ã­Ã Ã¸ ÃªÃ°Ã Ã±Ã¨Ã¢Ã»Ã© Ã´Ã®Ã­ 
 {
     int size = 15;
     RectangleShape cell(Vector2f(size, size));
@@ -295,7 +295,7 @@ int main()
                         }
                     }
 
-                    if (event.text.unicode >= 32 && event.text.unicode < 128) // Ïðîâåðêà ïå÷àòíûõ ñèìâîëîâ
+                    if (event.text.unicode >= 32 && event.text.unicode < 128) // ÃÃ°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã¯Ã¥Ã·Ã Ã²Ã­Ã»Ãµ Ã±Ã¨Ã¬Ã¢Ã®Ã«Ã®Ã¢
                     {
                         char enteredChar = static_cast<char>(event.text.unicode);
                         if (isValidChar(enteredChar, inputs[index]))
