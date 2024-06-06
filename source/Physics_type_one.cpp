@@ -9,42 +9,42 @@ using namespace std;
 class ball
 {
 public:
-    float radius; // радиус 
-    float height; // высота 
-    float speed; // скорость 
-    float e; // упругость 
+    float radius; // Г°Г Г¤ГЁГіГ± 
+    float height; // ГўГ»Г±Г®ГІГ  
+    float speed; // Г±ГЄГ®Г°Г®Г±ГІГј 
+    float e; // ГіГЇГ°ГіГЈГ®Г±ГІГј 
 
-    float kinetic_energy = 0; // кинетическая энергия мяча
-    float potencial_energy = 0; // потенциальная энергия мяча 
-    float initial_height; // начальная высота
-    float initial_speed; // начальная скорость 
+    float kinetic_energy = 0; // ГЄГЁГ­ГҐГІГЁГ·ГҐГ±ГЄГ Гї ГЅГ­ГҐГ°ГЈГЁГї Г¬ГїГ·Г 
+    float potencial_energy = 0; // ГЇГ®ГІГҐГ­Г¶ГЁГ Г«ГјГ­Г Гї ГЅГ­ГҐГ°ГЈГЁГї Г¬ГїГ·Г  
+    float initial_height; // Г­Г Г·Г Г«ГјГ­Г Гї ГўГ»Г±Г®ГІГ 
+    float initial_speed; // Г­Г Г·Г Г«ГјГ­Г Гї Г±ГЄГ®Г°Г®Г±ГІГј 
 
     CircleShape circle;
 
-    bool where_to_move; // переменная для отслеживания направления движения
-    bool is_moving; // переменная для отслеживания движения в целом 
+    bool where_to_move; // ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї Г®ГІГ±Г«ГҐГ¦ГЁГўГ Г­ГЁГї Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГї Г¤ГўГЁГ¦ГҐГ­ГЁГї
+    bool is_moving; // ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї Г®ГІГ±Г«ГҐГ¦ГЁГўГ Г­ГЁГї Г¤ГўГЁГ¦ГҐГ­ГЁГї Гў Г¶ГҐГ«Г®Г¬ 
 
-    ball(float n_radius, float n_height, float n_speed, float n_e) // наш конструктор 
+    ball(float n_radius, float n_height, float n_speed, float n_e) // Г­Г Гё ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° 
     {
-        radius = n_radius; // радиус нашего шара 
+        radius = n_radius; // Г°Г Г¤ГЁГіГ± Г­Г ГёГҐГЈГ® ГёГ Г°Г  
 
-        height = n_height; // высота текущая 
-        initial_height = n_height; // сохраняем начальную высоту
+        height = n_height; // ГўГ»Г±Г®ГІГ  ГІГҐГЄГіГ№Г Гї 
+        initial_height = n_height; // Г±Г®ГµГ°Г Г­ГїГҐГ¬ Г­Г Г·Г Г«ГјГ­ГіГѕ ГўГ»Г±Г®ГІГі
 
-        speed = n_speed; // скорость меняемая 
-        initial_speed = speed; // скорость начальная
+        speed = n_speed; // Г±ГЄГ®Г°Г®Г±ГІГј Г¬ГҐГ­ГїГҐГ¬Г Гї 
+        initial_speed = speed; // Г±ГЄГ®Г°Г®Г±ГІГј Г­Г Г·Г Г«ГјГ­Г Гї
 
-        e = n_e; // коефициент упругости 
+        e = n_e; // ГЄГ®ГҐГґГЁГ¶ГЁГҐГ­ГІ ГіГЇГ°ГіГЈГ®Г±ГІГЁ 
 
-        where_to_move = false; // начальное направление движения вниз
-        is_moving = true; // начальное движение есть 
+        where_to_move = false; // Г­Г Г·Г Г«ГјГ­Г®ГҐ Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ Г¤ГўГЁГ¦ГҐГ­ГЁГї ГўГ­ГЁГ§
+        is_moving = true; // Г­Г Г·Г Г«ГјГ­Г®ГҐ Г¤ГўГЁГ¦ГҐГ­ГЁГҐ ГҐГ±ГІГј 
 
         circle.setRadius(radius);
         circle.setFillColor(Color::Red);
         circle.setPosition(300, height);
     }
 
-    void draw(RenderWindow& window) // отрисовка 
+    void draw(RenderWindow& window) // Г®ГІГ°ГЁГ±Г®ГўГЄГ  
     {
         window.draw(circle);
     }
@@ -68,7 +68,7 @@ public:
                 {
                     height = initial_height;
                     speed = 0;
-                    where_to_move = false; // меняем направление на вниз
+                    where_to_move = false; // Г¬ГҐГ­ГїГҐГ¬ Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ Г­Г  ГўГ­ГЁГ§
                 }
             }
             else
@@ -92,7 +92,7 @@ public:
                         initial_height = 580.0f;
                     }
 
-                    where_to_move = true; // меняем направление на вверх
+                    where_to_move = true; // Г¬ГҐГ­ГїГҐГ¬ Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ Г­Г  ГўГўГҐГ°Гµ
                 }
             }
         }
