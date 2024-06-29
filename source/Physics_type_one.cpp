@@ -4,134 +4,147 @@
 #include <iostream>
 
 using namespace sf;
-using namespace std;
 
 class ball
 {
 public:
-    float radius; // ðàäèóñ 
-    float height; // âûñîòà 
-    float speed; // ñêîðîñòü 
-    float e; // óïðóãîñòü 
-
-    float kinetic_energy = 0; // êèíåòè÷åñêàÿ ýíåðãèÿ ìÿ÷à
-    float potencial_energy = 0; // ïîòåíöèàëüíàÿ ýíåðãèÿ ìÿ÷à 
-    float initial_height; // íà÷àëüíàÿ âûñîòà
-    float initial_speed; // íà÷àëüíàÿ ñêîðîñòü 
+    float radius = 0;
+    float height = 0;
+    float speed = 0.0002;
+    /*
+    Если скорость отрицательна - значит кидаем мячик вверх
+    Если скорость положительна - значит кидаем мячик вниз
+    */
+    float e = 0;
 
     CircleShape circle;
 
-    bool where_to_move; // ïåðåìåííàÿ äëÿ îòñëåæèâàíèÿ íàïðàâëåíèÿ äâèæåíèÿ
-    bool is_moving; // ïåðåìåííàÿ äëÿ îòñëåæèâàíèÿ äâèæåíèÿ â öåëîì 
+    float kinetic_energy = 0;
+    float potential_energy = 0;
 
-    ball(float n_radius, float n_height, float n_speed, float n_e) // íàø êîíñòðóêòîð 
+    bool is_moving = true;
+    bool is_up;
+
+    float speed_helper = 0;
+    float height_helper = 0;
+
+    float gravity_helper = 0.000098;
+
+    ball(float n_radius, float n_height, float n_speed, float n_e)
     {
-        radius = n_radius; // ðàäèóñ íàøåãî øàðà 
+        radius = n_radius;
+        height = n_height;
+        speed = n_speed;
+        e = n_e;
 
-        height = n_height; // âûñîòà òåêóùàÿ 
-        initial_height = n_height; // ñîõðàíÿåì íà÷àëüíóþ âûñîòó
+        if (speed >= 0)
+        {
+            is_up = false;
+        }
+        else
+        {
+            is_up = true;
+        }
 
-        speed = n_speed; // ñêîðîñòü ìåíÿåìàÿ 
-        initial_speed = speed; // ñêîðîñòü íà÷àëüíàÿ
-
-        e = n_e; // êîåôèöèåíò óïðóãîñòè 
-
-        where_to_move = false; // íà÷àëüíîå íàïðàâëåíèå äâèæåíèÿ âíèç
-        is_moving = true; // íà÷àëüíîå äâèæåíèå åñòü 
+        speed_helper = speed;
+        height_helper = height;
 
         circle.setRadius(radius);
         circle.setFillColor(Color::Red);
-        circle.setPosition(300, height);
+        circle.setPosition(400 - radius, height);
     }
 
-    void draw(RenderWindow& window) // îòðèñîâêà 
+    int is_speed = 1;
+    void type_fall_up()
     {
-        window.draw(circle);
-    }
-
-    void path()
-    {
-        float gravity = 0.000098;
-
-        if (initial_height < 20.0f)
+        if (is_speed)
         {
-            is_moving = false;
-            return;
-        }
-        if (is_moving)
-        {
-            if (where_to_move)
+            if (speed >= 0)
             {
-                speed = speed - gravity;
-                height -= speed;
-                if (height <= initial_height)
-                {
-                    height = initial_height;
-                    speed = 0;
-                    where_to_move = false; // ìåíÿåì íàïðàâëåíèå íà âíèç
-                }
+                speed = speed - gravity_helper;
+                height = height - speed;
             }
             else
             {
-                speed = speed + gravity;
-                height += speed;
-                if (height >= 580.0f)
-                {
-                    height = 580.0f;
-
-                    if (e * e == 1)
-                    {
-                        initial_height = initial_height;
-                    }
-                    else
-                    {
-                        initial_height = initial_height * e * e;
-                    }
-                    if (initial_height > 580.0f)
-                    {
-                        initial_height = 580.0f;
-                    }
-
-                    where_to_move = true; // ìåíÿåì íàïðàâëåíèå íà ââåðõ
-                }
+                is_speed = 0;
             }
         }
-
+        else
+        {
+            if (height <= 580)
+            {
+                speed = speed + gravity_helper;
+                height = height + speed;
+            }
+            else
+            {
+                speed = speed - 0.01;
+                is_speed = 1;
+            }
+        }
         circle.setPosition(circle.getPosition().x, height);
+    }
+
+    int pointer = 0; // если 0 то падает вниз, если 1 - то летит вверх(отбился)
+    void type_fall_down()
+    {
+        if (pointer)
+        {
+            if (speed >= 0)
+            {
+                speed = speed - gravity_helper;
+                height = height - speed;
+            }
+            else
+            {
+                pointer = 0;
+            }
+        }
+        else
+        {
+            if (height <= 580)
+            {
+                speed = speed + gravity_helper;
+                height = height + speed;
+            }
+            else
+            {
+                speed = speed - 0.01;
+                pointer = 1;
+            }
+        }
+        circle.setPosition(circle.getPosition().x, height);
+    }
+
+    void draw(RenderWindow& window)
+    {
+        window.draw(circle);
     }
 };
 
-void energy_law(float speed, float heigth)
+int main(void)
 {
-    float potencial = 1 * heigth * 0.098;
-    float kinetic = 1 * speed * speed / 2;
-}
+	RenderWindow window(VideoMode(800, 600), "Correct");
 
-int main()
-{
-    RenderWindow window(VideoMode(900, 600), "Tested");
+    ball b(10, 300, 0.1, 0.8); // Создаем мяч с начальной скоростью вверх
 
-    ball test(10, 50, 0.0001, 1.3544);
-
+    Clock clock;
     while (window.isOpen())
     {
         Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Q))
-            {
+            if (event.type == Event::Closed)
                 window.close();
-            }
         }
 
-        test.path();
+        b.type_fall_up();
 
         window.clear();
-
-        test.draw(window);
-
+       
+        b.draw(window);
         window.display();
     }
 
-    return 0;
+	return 0;
 }
