@@ -1,4 +1,4 @@
-# Simulator-of-falling
+# SimulatorOfFalling
 This is my small project demonstrating the fall of a ball depending on user specified parameters.
 ## Table of content
 * [General info](#general-info)
